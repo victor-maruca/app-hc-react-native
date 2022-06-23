@@ -1,29 +1,35 @@
 import React from 'react';
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { IDView } from './Pages/ID';
+import { FAQView } from './Pages/FAQ'
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+
+const Tab = createMaterialBottomTabNavigator();
 
 const App = () => {
   return (
-    <View style={styles.viewContainer}>
-      <StatusBar barStyle='light-content' />
-      <Text style={styles.helloText}>Hello World</Text>
-    </View>
+    <Tab.Navigator
+      initialRouteName="Carteira"
+      labeled={false}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Carteira') {
+            iconName = 'address-card'
+          } else if (route.name === 'FAQ') {
+            iconName = 'question-circle'
+          }
+
+          return <Icon name={iconName} color={color} size={22}/>;
+        },
+      })}
+    >
+        <Tab.Screen name="Carteira" options={{tabBarActiveBackgroundColor: 'red'}} component={IDView} />
+        <Tab.Screen name="FAQ" options={{tabBarActiveBackgroundColor: 'red'}} component={FAQView} />
+    </Tab.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  viewContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  helloText: {
-    fontSize: 30
-  }
-});
 
 export default App;
