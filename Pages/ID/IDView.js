@@ -1,17 +1,21 @@
 import React from 'react';
-import { StyleSheet, View } from "react-native"
-import { Button } from "react-native-paper";
+import { createStackNavigator } from '@react-navigation/stack';
+import IDHome from './IDHome';
+import PersonalID from './PersonalID';
+import IDCreate from './IDCreate';
+
+const Stack = createStackNavigator();
 
 export const IDView = ({ navigation }) => {
-    return (<View style={styles.view}>
-        <Button onPress={() => navigation.navigate('FAQ')}>Ir para o FAQ</Button>
-    </View>);
+    return (
+        <Stack.Navigator
+            initialRouteName={"IDHome"}
+            screenOptions={{ headerShown: false }}
+        >
+            <Stack.Screen name="IDHome" component={IDHome} />
+            <Stack.Screen name="PersonalID" component={PersonalID} />
+            <Stack.Screen name="IDCreate" component={IDCreate} />
+        </Stack.Navigator>
+        
+    );
 }
-
-const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});

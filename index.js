@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import {AppRegistry} from 'react-native';
 import App from './App';
@@ -14,7 +15,8 @@ const theme = {
     primary: '#673AB7',
     secondary: '#009688',
     tertiary: '#3F51B5',
-    quaternary: '#9C27B0'
+    quaternary: '#9C27B0',
+    text: '#20222D'
   },
 };
 
