@@ -13,8 +13,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
  *      lastName: string,
  *      hcNumber: string,
  *      avatarImage: string,
- *      cpf: int,
- *      rg: int,
+ *      cpf: string,
+ *      rg: string,
  *      birthday: date,
         city: string
  *      address: string
@@ -49,8 +49,8 @@ export const IDHome = ({ navigation }) => {
                         underlayColor="#DDDDDD"    
                     >
                         <View style={{...styles.card, ...cardDimensions}} >
-                                <Icon name='user' color='#8a8a8a' size={40}/>
-                                <Text style={styles.namesText}>{carteira?.firstName} {carteira?.lastName}</Text>
+                            <Icon name='user' color='#8a8a8a' size={40}/>
+                            <Text style={styles.namesText}>{carteira?.firstName} {carteira?.lastName}</Text>
                         </View>    
                     </TouchableHighlight>  
                 })}

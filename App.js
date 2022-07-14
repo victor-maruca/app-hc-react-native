@@ -36,7 +36,6 @@ const App = () => {
     >
         <Tab.Screen name="Carteira" options={{ tabBarColor: colors.quaternary }} component={IDView} />
         <Tab.Screen name="Checklist" options={{ tabBarColor: colors.primary }} component={ChecklistView} />
-        <Tab.Screen name="Mapa" options={{ tabBarColor: colors.secondary }} component={MapView} />
         <Tab.Screen name="FAQ" options={{ tabBarColor: colors.tertiary }} component={FAQView} />
     </Tab.Navigator>
   );

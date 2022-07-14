@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Dimensions, ScrollView, StyleSheet, View, TouchableHighlight } from "react-native";
-import { Text, TextInput, Button } from 'react-native-paper';
+import { Text, TextInput, Button, HelperText } from 'react-native-paper';
 import TextInputMask from 'react-native-text-input-mask';
 import DatePicker from 'react-native-date-picker'
 import * as yup from "yup";
@@ -242,7 +242,7 @@ const IDCreate = ({ navigation }) => {
                         <View style={{height: 50}} />
                         <Button mode="contained" color='#9C27B0' onPress={handleSubmit(onSubmit)}>Criar carteira</Button>
                         
-                        { error && <Text style={styles.errorMsg}>{error}</Text> }
+                        { error && <HelperText type="error" visible={error}>{error}</HelperText> }
                     </View>
                 </View>
             </View>
