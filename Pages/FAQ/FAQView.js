@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native"
+import { ScrollView, StyleSheet, View, Dimensions } from "react-native"
 import { List, Searchbar, Text } from "react-native-paper";
-import { Dimensions } from 'react-native';
 import { FAQ } from "../../Data/faq";
 
 const lcFAQ = FAQ.map(({ question, answer }) => { return { question: question.toLowerCase(), answer: answer.toLowerCase() }})
@@ -29,7 +28,7 @@ export const FAQView = ({ navigation }) => {
 
     useEffect(() => {
         const idxs = [];
-        for (let i = 0 ; i < FAQ.length ; i++) if(lcFAQ[i].question.includes(searchQuery)) idxs.push(i);
+        for (let i = 0 ; i < FAQ.length ; i++) if(lcFAQ[i].question.includes(searchQuery) || lcFAQ[i].answer.includes(searchQuery)) idxs.push(i);
         setFilteredFAQ(FAQ.filter((_, i) => idxs.includes(i)));
     }, [searchQuery])
 

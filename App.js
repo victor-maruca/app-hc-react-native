@@ -2,10 +2,10 @@ import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { IDView } from './Pages/ID';
 import { FAQView } from './Pages/FAQ'
-import { MapView } from './Pages/Map';
 import { ChecklistView } from './Pages/Checklist/ChecklistView';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useTheme } from 'react-native-paper';
+import { HomeView } from './Pages/Home';
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -14,28 +14,24 @@ const App = () => {
   const { colors } = useTheme();
   return (
     <Tab.Navigator
-      initialRouteName="Carteira"
+      initialRouteName="Home"
       shifting={true}
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color }) => {
+        tabBarIcon: ({ color }) => {
           let iconName;
-
-          if (route.name === 'Carteira') {
-            iconName = 'address-card'
-          } else if (route.name === 'FAQ') {
-            iconName = 'question-circle'
-          } else if (route.name === 'Mapa') {
-            iconName = 'map-marker'
-          } else if (route.name === 'Checklist') {
-            iconName = 'list-ul'
+          switch(route.name) {
+            case 'Carteira': iconName = 'address-card'; break;
+            case 'FAQ': iconName = 'question-circle'; break;
+            case 'Checklist': iconName = 'list-ul'; break;
+            case 'Home': iconName = 'home'; break;
           }
-
           return <Icon name={iconName} color={color} size={22}/>;
         },
       })}
     >
-        <Tab.Screen name="Carteira" options={{ tabBarColor: colors.quaternary }} component={IDView} />
-        <Tab.Screen name="Checklist" options={{ tabBarColor: colors.primary }} component={ChecklistView} />
+        <Tab.Screen name="Home" options={{ tabBarColor: colors.secondary, title: "Bem vindo!" }} component={HomeView} />
+        <Tab.Screen name="Carteira" options={{ tabBarColor: colors.quaternary, title: "Carteira HC" }} component={IDView} />
+        <Tab.Screen name="Checklist"  options={{ tabBarColor: colors.primary, title: "Dr. Virtual" }} component={ChecklistView} />
         <Tab.Screen name="FAQ" options={{ tabBarColor: colors.tertiary }} component={FAQView} />
     </Tab.Navigator>
   );
