@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native"
 import { Button, Text } from "react-native-paper";
 import { Dimensions } from 'react-native';
@@ -13,6 +13,7 @@ export const ChecklistView = ({ navigation }) => {
     const imageDimensions = dimensions.screen.width * 0.2;
     const [flow, setFlow] = useState([FLUXOS.key]);
     const [current, setCurrent] = useState(FLUXOS);
+    const scrollRef = useRef(null);
 
     useEffect(() => {
         const subscription = Dimensions.addEventListener(
@@ -24,15 +25,22 @@ export const ChecklistView = ({ navigation }) => {
         return () => subscription?.remove();
     });
 
+    const goBack = () => {
+        setCurrent(FLUXOS);
+        setFlow([FLUXOS.key]);
+        scrollRef.current?.scrollTo({ x: 0, y: 0, animated: true });
+    };
+
     const onPressOption = (option) => {
         let newFlow = flow;
         newFlow.push(option);
         setFlow(newFlow);
         setCurrent(current.children.find(o => o.key == option));
+        scrollRef.current?.scrollToEnd({ animated: true });
     }
 
     return (
-        <ScrollView>
+        <ScrollView ref={scrollRef}>
             <View style={styles.view}>
                 <View style={{ height: dimensions.screen.height * 0.3, ...styles.upperContainer }}>
                     <View>
@@ -43,7 +51,7 @@ export const ChecklistView = ({ navigation }) => {
                 <View style={{ ...styles.bgBotoom, minHeight: dimensions.screen.height * 0.7 }}>
                     <View style={{ ...styles.bottomContainer, minHeight: dimensions.screen.height * 0.7 }}>
                         <View style={{ ...styles.chatBg, minHeight: dimensions.screen.height * 0.7 }}>
-                            {mountChat(flow, imageDimensions, onPressOption)}
+                            {mountChat(flow, imageDimensions, onPressOption, goBack)}
                         </View>
                     </View>
                 </View>
@@ -52,7 +60,7 @@ export const ChecklistView = ({ navigation }) => {
     );
 }
 
-const mountChat = (path, imageDimensions, onPressOption) => {
+const mountChat = (path, imageDimensions, onPressOption, goBack) => {
     const mounted = [];
     let current = { children: [FLUXOS] };
     
@@ -60,16 +68,16 @@ const mountChat = (path, imageDimensions, onPressOption) => {
         current = current.children.find(o => o.key == path[i]);
         mounted.push(
             <View key={i}>
-                { i > 0 && <View height={60} /> }
+                { i > 0 && <View height={40} /> }
                 <View style={{ flexDirection: 'row' }}>
                     <Image source={doctorImage} style={{ width: imageDimensions, height: imageDimensions, resizeMode: 'contain' }} />
                     <Text style={styles.description}>{current.description}</Text>
                 </View>
                 <View height={20} />
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <View>
+                    <View style={{ justifyContent: 'center' }}>
                         {
-                            current.options.length && current.options.map((option, k) => {
+                            current.options && current.options.map((option, k) => {
                                 let colors = ['#673AB7', '#009688', '#3F51B5', '#9C27B0'];
                                 let color = colors[Math.floor((Math.random(1, 1000) * 10) + 4) % 4];
                                 return <Button 
@@ -84,11 +92,22 @@ const mountChat = (path, imageDimensions, onPressOption) => {
                                 </Button>
                             })
                         }
+                        {
+                            !current.options && <Button 
+                                mode="contained" 
+                                color="#673AB7" 
+                                style={styles.option} 
+                                onPress={() => goBack()}
+                            >
+                                    Voltar para o início
+                            </Button>
+                        }
                     </View>
                     <View style={{ ...styles.euContainer, height: imageDimensions * 0.9, width: imageDimensions * 0.9, borderRadius: imageDimensions / 2 }}>
                         <Text style={styles.euText}>EU</Text>
                     </View>
                 </View>
+                <View height={20} />
             </View>
         );
     }
@@ -144,7 +163,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 15,
         marginTop: 15,
-        textAlign: 'justify'
+        textAlign: 'left'
     },
     euContainer: {
         borderRadius: '50%',
