@@ -22,7 +22,7 @@ const App = () => {
           switch(route.name) {
             case 'Carteira': iconName = 'address-card'; break;
             case 'FAQ': iconName = 'question-circle'; break;
-            case 'Checklist': iconName = 'list-ul'; break;
+            case 'Checklist': iconName = 'commenting'; break;
             case 'Home': iconName = 'home'; break;
           }
           return <Icon name={iconName} color={color} size={22}/>;

@@ -53,7 +53,7 @@ export const HomeView = ({ navigation }) => {
                     <View height={10} />
                     <View style={styles.minContainer}>
                         <View style={styles.pageLine}>
-                            <Icon name="list-ul" color='#673AB7' size={22} />
+                            <Icon name="commenting" color='#673AB7' size={22} />
                             <View width={10} />
                             <Text style={{ ...styles.subtitle, color: '#673AB7' }}>Dr. Virtual</Text>
                         </View>

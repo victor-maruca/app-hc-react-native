@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native"
 import { Button, Text } from "react-native-paper";
 import { Dimensions } from 'react-native';
-import { FLUXOS } from "./flows";
+import { FLUXOS } from "../../Data/flows";
 
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");

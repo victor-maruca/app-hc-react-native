@@ -24,11 +24,11 @@ export const FAQView = ({ navigation }) => {
         return () => subscription?.remove();
     });
 
-    const onChangeSearch = query => setSearchQuery(query.toLowerCase());
+    const onChangeSearch = query => setSearchQuery(query);
 
     useEffect(() => {
         const idxs = [];
-        for (let i = 0 ; i < FAQ.length ; i++) if(lcFAQ[i].question.includes(searchQuery) || lcFAQ[i].answer.includes(searchQuery)) idxs.push(i);
+        for (let i = 0 ; i < FAQ.length ; i++) if(lcFAQ[i].question.includes(searchQuery.toLowerCase()) || lcFAQ[i].answer.includes(searchQuery.toLowerCase())) idxs.push(i);
         setFilteredFAQ(FAQ.filter((_, i) => idxs.includes(i)));
     }, [searchQuery])
 
