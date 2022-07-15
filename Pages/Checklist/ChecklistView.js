@@ -10,7 +10,7 @@ const doctorImage = require('../../assets/doctor.png');
 
 export const ChecklistView = ({ navigation }) => {
     const [dimensions, setDimensions] = useState({ window, screen });    
-    const imageDimensions = dimensions.screen.width * 0.2;
+    const imageDimensions = dimensions.screen.width * 0.15;
     const [flow, setFlow] = useState([FLUXOS.key]);
     const [current, setCurrent] = useState(FLUXOS);
     const scrollRef = useRef(null);
