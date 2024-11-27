@@ -1,0 +1,1 @@
+This project was developed as part of a college course and completed over a couple of months. Its goal is to enhance the quality of service provided to individuals newly arriving at the university hospital. By focusing on user needs and efficiency, the project aims to streamline initial interactions and provide a better experience for patients and staff alike.
